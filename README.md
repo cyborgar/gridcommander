@@ -12,6 +12,6 @@ Then compile using
 ```
 %JAVA_PATH% -jar prog8compiler-8.0-all.jar -srcdirs c64 -target c64 gridcommander.p8
 
-%VICE_PATH%\x64sc.exe petaxian.prg
+%VICE_PATH%\x64sc.exe gridcommander.prg
 ```
 
