@@ -84,7 +84,7 @@ ship {
   sub check_collision() -> ubyte {
     ubyte hit_char = txt.getchr(x, y)
     if hit_char != gamescreen.BCK_CHAR { ; Hit something
-      if hit_char == $2b
+      if hit_char == remains.REMAINS_CHAR
         return 1
 
       ; explode ship

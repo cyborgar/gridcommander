@@ -94,7 +94,7 @@ snake {
                 snakePartRef[SN_DIR] = 3
               }
             }
-            $2b -> { ; We hit a existing "bomb", need to move down
+            remains.REMAINS_CHAR -> { ; We hit a existing "bomb", need to move down
               snakePartRef[SN_Y]++ 
               if snakePartRef[SN_DIR] == 3 {
                 snakePartRef[SN_DIR] = 1
@@ -103,7 +103,7 @@ snake {
               }
 	      ; Is new location occupied?
 	      chr = txt.getchr(x, y+1)
-	      while (chr == $2b) {
+	      while (chr == remains.REMAINS_CHAR) {
                 snakePartRef[SN_Y]++ ; Skip another level down
 		y++
 		chr = txt.getchr(x, y+1)
@@ -140,9 +140,10 @@ snake {
       ubyte y = snakePartRef[SN_Y]
 
       if x == hx and y == hy {
-        snakePartRef[SN_ON] = false ; turn off bullet
+        snakePartRef[SN_ON] = false ; Part was "destroyed"
 	main.add_score(10)
-        ; leave "grenade"? Create separate module
+
+        ; Covert to a "grenade" 
         remains.add(x,y);
         return
       }

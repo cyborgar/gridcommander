@@ -26,6 +26,10 @@ main {
   ubyte bullet_speed = 2
   ubyte bullet_sub_counter
 
+  ; reamins move variables
+  ubyte remains_speed = 3
+  ubyte remains_sub_counter
+
   ; enemy move variables
   ubyte enemy_speed = 6
   ubyte enemy_sub_counter
@@ -54,8 +58,8 @@ main {
   }
 
   sub game_loop() {
-    gamescreen.draw()
-	
+    gamescreen.init()
+
     ; Use to identify diagonal movement since this need to be "slower" for
     ; diagonal movement feel natural.
     ubyte move_count
@@ -68,10 +72,12 @@ main {
     player_sub_counter = 0
     bullet_sub_counter = 0
     enemy_sub_counter = 0
+    remains_sub_counter = 0
 
     ship.init()
     bullets.init()
     snake.init()
+    remains.init()
 
     snake.create_snake()
 
@@ -86,8 +92,15 @@ main {
         ; Move bullets
         bullet_sub_counter++
         if bullet_sub_counter == bullet_speed {
-           bullets.move()
-           bullet_sub_counter = 0
+          bullets.move()
+          bullet_sub_counter = 0
+        }
+
+	; Move remains
+        remains_sub_counter++
+        if remains_sub_counter == remains_speed {
+	  remains.do_countdowns()
+          remains_sub_counter = 0
         }
 
         ; Player movement
@@ -195,7 +208,7 @@ main {
     score += points
 
     ; Add new life counter?
-    ; printScore() ; New score display somwhere
+    gamescreen.printScore()
   }
 
 }

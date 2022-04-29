@@ -15,8 +15,13 @@ rawdata:
   const ubyte WALL_RIGHT = $F3
   const ubyte WALL_BOTTOM = $F1
 
+  sub init() {
+    draw_playfield()
+    printScore()
+  }
+
   ; Copy data from data blob into Screen/Color ram
-  sub draw() {
+  sub draw_playfield() {
     uword charPtr = &rawdata
     uword colPtr = charPtr + 1000
 
@@ -33,4 +38,13 @@ rawdata:
       colPtr++
     }
   }
+
+  sub printScore() {
+    conv.str_uw0(main.score)
+    ubyte i
+    for i in 0 to 4 {
+      txt.setcc( 30 + i, 0, conv.string_out[i], 1)
+    }
+  }
+
 }

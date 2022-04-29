@@ -74,11 +74,15 @@ bullets {
           active_shots--
         } else {       
           ; Hit something?
-          if txt.getchr( bulletRef[BD_X], bulletRef[BD_Y] )
-               != gamescreen.BCK_CHAR {
+	  ubyte chr = txt.getchr( bulletRef[BD_X], bulletRef[BD_Y] )
+          if chr != gamescreen.BCK_CHAR {
 	    ; Check what we hit
-	    ; Can just hit snake right now, but should check more
-            snake.bullet_hit( bulletRef[BD_X], bulletRef[BD_Y] ) ; Handle snake hit
+
+	    if chr == $89 { ; Hit snake
+              snake.bullet_hit( bulletRef[BD_X], bulletRef[BD_Y] )
+            } else if chr == remains.REMAINS_CHAR { ; Hit remains
+	      ; Do nothing for now
+            }
             bulletRef[BD_ON] = false
             active_shots--
           } else {
