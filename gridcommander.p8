@@ -26,7 +26,7 @@ main {
   ubyte bullet_speed = 2
   ubyte bullet_sub_counter
 
-  ; reamins move variables
+  ; remains move variables
   ubyte remains_speed = 3
   ubyte remains_sub_counter
 
@@ -47,7 +47,7 @@ main {
 
   sub game_title() {
     title.draw()
-;    usage.setup()
+;    usage.setup()  ; Add control info etc. here maybe
 
     ; Add startup delay to prevent "start" button press from
     ; immediately trigger start of game
@@ -96,10 +96,10 @@ main {
           bullet_sub_counter = 0
         }
 
-	; Move remains
+        ; Move remains
         remains_sub_counter++
         if remains_sub_counter == remains_speed {
-	  remains.do_countdowns()
+          remains.do_countdowns()
           remains_sub_counter = 0
         }
 
@@ -118,10 +118,10 @@ main {
               bullet_frequency--
           }
 	
-          ; This joystick code isn't very efficient when we can move in both planes
-          ; At worst all 4 calls may be called. Consider rewrite that returns single
-          ; value (joystick.direction_value) and use array to look up delay counter
-          ; and x/y movements.
+          ; This joystick code isn't very efficient when we can move in
+	  ; both planes. At worst all 4 calls may be called. Consider
+	  ; rewrite that returns single value (joystick.direction_value)
+	  ; and use array to look up delay counter and x/y movements.
 
           if joystick.pushing_left() {
             ship.left()
