@@ -30,8 +30,6 @@ snake {
 
   uword snakePartRef ; Point to part of snake (avoid passing parameter)
 
-  ubyte i; global loop counter (avoid parm passing)
-
   ; Clear data 
   sub init() {
      sys.memset(&snakeData, FIELD_COUNT * ENEMY_COUNT, 0)
@@ -44,7 +42,7 @@ snake {
     ubyte x = base.RBORDER + 1
 
     snakePartRef = &snakeData
-    for i in 1 to ENEMY_COUNT {
+    repeat ENEMY_COUNT {
       snakePartRef[SN_ON] =    true ; Active
       snakePartRef[SN_DIR] =   3    ; Go left
       snakePartRef[SN_X] =     x    ; Postion from par (Can be negative later)
@@ -57,7 +55,7 @@ snake {
 
   sub move_all() {
     snakePartRef = &snakeData
-    for i in 1 to ENEMY_COUNT {
+    repeat ENEMY_COUNT {
       if snakePartRef[SN_ON] == true {
         ubyte x = snakePartRef[SN_X]
         ubyte y = snakePartRef[SN_Y]
@@ -105,8 +103,8 @@ snake {
 	      chr = txt.getchr(x, y+1)
 	      while (chr == remains.REMAINS_CHAR) {
                 snakePartRef[SN_Y]++ ; Skip another level down
-		y++
-		chr = txt.getchr(x, y+1)
+                y++
+                chr = txt.getchr(x, y+1)
               }
             }
           }
@@ -135,7 +133,7 @@ snake {
   ; loop through parts to find hit "bit"
   sub bullet_hit( ubyte hx, ubyte hy ) {
     snakePartRef = &snakeData
-    for i in 1 to ENEMY_COUNT { ; Find right part
+    repeat ENEMY_COUNT { ; Find right part
       ubyte x = snakePartRef[SN_X]
       ubyte y = snakePartRef[SN_Y]
 
