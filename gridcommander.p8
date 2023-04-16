@@ -78,6 +78,7 @@ main {
     bullets.init()
     snake.init()
     remains.init()
+    drop_bomb.init()
 
     snake.create_snake()
 
