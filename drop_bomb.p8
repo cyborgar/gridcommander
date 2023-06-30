@@ -24,4 +24,8 @@ drop_bomb {
   sub create( ubyte x, ubyte y ) {
       txt.setcc( x, y, gamescreen.BCK_CHAR, gamescreen.BCK_COLOR )
   }
+
+  sub move() {
+    
+  }
 }

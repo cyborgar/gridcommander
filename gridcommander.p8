@@ -30,6 +30,10 @@ main {
   ubyte remains_speed = 3
   ubyte remains_sub_counter
 
+  ; bomb move variables
+  ubyte bomb_speed = 2
+  ubyte bomb_sub_counter
+
   ; enemy move variables
   ubyte enemy_speed = 6
   ubyte enemy_sub_counter
@@ -73,6 +77,7 @@ main {
     bullet_sub_counter = 0
     enemy_sub_counter = 0
     remains_sub_counter = 0
+    bomb_sub_counter = 0
 
     ship.init()
     bullets.init()
@@ -83,11 +88,11 @@ main {
     snake.create_snake()
 
     repeat {
-      ubyte time_lo = lsb(c64.RDTIM16())
+      ubyte time_lo = lsb(cbm.RDTIM16())
 
       ; May needed to find a better timer
       if time_lo >= 1 {
-        c64.SETTIM(0,0,0)
+        cbm.SETTIM(0,0,0)
         wave_ticks++
 
         ; Move bullets
@@ -102,6 +107,13 @@ main {
         if remains_sub_counter == remains_speed {
           remains.do_countdowns()
           remains_sub_counter = 0
+        }
+
+        ; Move bombs
+        bomb_sub_counter++
+        if bomb_sub_counter == bomb_speed {
+          drop_bomb.move()
+          bomb_sub_counter = 0
         }
 
         ; Player movement
@@ -141,7 +153,7 @@ main {
           }
 
           ; Check keyboard
-          ubyte key = c64.GETIN()
+          ubyte key = cbm.GETIN()
       	  when key {
             'w' -> ship.up()
             'd' -> ship.right()
@@ -174,14 +186,14 @@ main {
 
   sub wait_key(ubyte key, uword strRef, ubyte x, ubyte y,
                uword colorRef, ubyte do_usage) {
-    ubyte time_lo = lsb(c64.RDTIM16())
+    ubyte time_lo = lsb(cbm.RDTIM16())
     ubyte color = 0
 
     ubyte inp = 0
     while inp != key {
-       inp = c64.GETIN()
+       inp = cbm.GETIN()
        if time_lo >= 2 {
-         c64.SETTIM(0,0,0)
+         cbm.SETTIM(0,0,0)
          write( colorRef[color], x, y, strRef )
          color++
          if color == colors.PULSE_SIZE {
@@ -195,7 +207,7 @@ main {
        if joystick.pushing_up()
          return
 
-       time_lo = lsb(c64.RDTIM16())
+       time_lo = lsb(cbm.RDTIM16())
     }
   }
 

@@ -25,8 +25,8 @@ rawdata:
     uword charPtr = &rawdata
     uword colPtr = charPtr + 1000
 
-    uword screenPtr = c64.Screen
-    uword colorPtr = c64.Colors
+    uword screenPtr = cbm.Screen
+    uword colorPtr = cbm.Colors
 
     repeat 1000 {
       screenPtr[0] = charPtr[0]
