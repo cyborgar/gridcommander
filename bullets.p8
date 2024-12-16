@@ -38,8 +38,8 @@ bullets {
     bulletRef = &bulletData
     ubyte i = 0
     while i < MAX_BULLETS {
-      if bulletRef[BD_ON] == false { ; Find first "free" bullet
-        bulletRef[BD_ON] = true
+      if bulletRef[BD_ON] == 0 { ; Find first "free" bullet
+        bulletRef[BD_ON] = 1
         bulletRef[BD_DIR] = 0
         bulletRef[BD_X] = x
         bulletRef[BD_Y] = y
@@ -66,24 +66,24 @@ bullets {
     bulletRef = &bulletData
     ubyte i = 0
     while i < MAX_BULLETS {
-      if bulletRef[BD_ON] == true {
+      if bulletRef[BD_ON] == 1 {
         clear() ; Clear old position
         bulletRef[BD_Y]--;
         if bulletRef[BD_Y] == base.UBORDER { ; Hit top border
-          bulletRef[BD_ON] = false
+          bulletRef[BD_ON] = 0
           active_shots--
         } else {       
           ; Hit something?
-	  ubyte chr = txt.getchr( bulletRef[BD_X], bulletRef[BD_Y] )
+	        ubyte chr = txt.getchr( bulletRef[BD_X], bulletRef[BD_Y] )
           if chr != gamescreen.BCK_CHAR {
-	    ; Check what we hit
+	          ; Check what we hit
 
-	    if chr == $89 { ; Hit snake
+	          if chr == $89 { ; Hit snake
               snake.bullet_hit( bulletRef[BD_X], bulletRef[BD_Y] )
             } else if chr == remains.REMAINS_CHAR { ; Hit remains
-	      ; Do nothing for now
+	            ; Do nothing for now
             }
-            bulletRef[BD_ON] = false
+            bulletRef[BD_ON] = 0
             active_shots--
           } else {
             draw()

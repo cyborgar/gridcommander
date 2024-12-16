@@ -132,9 +132,9 @@ main {
           }
 	
           ; This joystick code isn't very efficient when we can move in
-	  ; both planes. At worst all 4 calls may be called. Consider
-	  ; rewrite that returns single value (joystick.direction_value)
-	  ; and use array to look up delay counter and x/y movements.
+	        ; both planes. At worst all 4 calls may be called. Consider
+          ; rewrite that returns single value (joystick.direction_value)
+          ; and use array to look up delay counter and x/y movements.
 
           if joystick.pushing_left() {
             ship.left()
@@ -153,7 +153,7 @@ main {
           }
 
           ; Check keyboard
-          ubyte key = cbm.GETIN()
+          ubyte key = cbm.GETIN2()
       	  when key {
             'w' -> ship.up()
             'd' -> ship.right()
@@ -177,6 +177,10 @@ main {
           snake.move_all()
           enemy_sub_counter = 0
         }
+
+        ; End game check (just for initial test)
+        if score == 100
+          return
       }
     }
   }
@@ -191,7 +195,7 @@ main {
 
     ubyte inp = 0
     while inp != key {
-       inp = cbm.GETIN()
+       inp = cbm.GETIN2()
        if time_lo >= 2 {
          cbm.SETTIM(0,0,0)
          write( colorRef[color], x, y, strRef )

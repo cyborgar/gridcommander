@@ -6,7 +6,7 @@ sound {
   }
 
   sub check() {
-    if sound_cutoff {
+    if sound_cutoff > 0 {
       if sound_cutoff == 1
         off()
       sound_cutoff--

@@ -43,7 +43,7 @@ snake {
 
     snakePartRef = &snakeData
     repeat ENEMY_COUNT {
-      snakePartRef[SN_ON] =    true ; Active
+      snakePartRef[SN_ON] =    1 ; Active
       snakePartRef[SN_DIR] =   3    ; Go left
       snakePartRef[SN_X] =     x    ; Postion from par (Can be negative later)
       snakePartRef[SN_Y] = base.UBORDER + 1 ; Fixed deplyment y pos
@@ -56,7 +56,7 @@ snake {
   sub move_all() {
     snakePartRef = &snakeData
     repeat ENEMY_COUNT {
-      if snakePartRef[SN_ON] == true {
+      if snakePartRef[SN_ON] == 1 {
         ubyte x = snakePartRef[SN_X]
         ubyte y = snakePartRef[SN_Y]
         ubyte dir = snakePartRef[SN_DIR]
@@ -138,7 +138,7 @@ snake {
       ubyte y = snakePartRef[SN_Y]
 
       if x == hx and y == hy {
-        snakePartRef[SN_ON] = false ; Part was "destroyed"
+        snakePartRef[SN_ON] = 0 ; Part was "destroyed"
 	main.add_score(10)
 
         ; Covert to a "grenade" 

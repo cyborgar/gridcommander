@@ -81,11 +81,11 @@ ship {
   }
 
   ; Check for collision with anything. Note that walls are already handled
-  sub check_collision() -> ubyte {
+  sub check_collision() -> bool {
     ubyte hit_char = txt.getchr(x, y)
     if hit_char != gamescreen.BCK_CHAR { ; Hit something
       if hit_char == remains.REMAINS_CHAR
-        return 1
+        return true
 
       ; explode ship
       ; destroy offending "unit"
@@ -96,7 +96,7 @@ ship {
       ;   end game
     }
 
-    return 0
+    return false
   }
 
 }
