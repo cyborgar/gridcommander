@@ -46,4 +46,8 @@ rawdata:
     }
   }
 
+  sub clear(ubyte x, ubyte y) {
+    txt.setcc(x, y, BCK_CHAR, BCK_COLOR)
+  }
+
 }

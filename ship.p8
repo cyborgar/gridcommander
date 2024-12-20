@@ -24,12 +24,8 @@ ship {
     txt.setcc(x, y, SHIP_CHAR, SHIP_COLOR)
   }
 
-  sub clear() {
-    txt.setcc(x, y, gamescreen.BCK_CHAR, gamescreen.BCK_COLOR)
-  }
-
   sub up() {
-    clear()
+    gamescreen.clear(x, y)
     if y > base.UBORDER + 1 {
       y--
     }
@@ -39,7 +35,7 @@ ship {
   }
 
   sub right() {
-    clear()
+    gamescreen.clear(x, y)
     if x < base.RBORDER - 1 {
       x++
     }
@@ -49,7 +45,7 @@ ship {
   }
 
   sub down() {
-    clear()
+    gamescreen.clear(x, y)
     if y < base.BBORDER - 1 {
       y++
     }
@@ -59,7 +55,7 @@ ship {
   }
 
   sub left() {
-    clear()
+    gamescreen.clear(x, y)
     if x > base.LBORDER + 1 {
       x--
     }
@@ -84,7 +80,7 @@ ship {
   sub check_collision() -> bool {
     ubyte hit_char = txt.getchr(x, y)
     if hit_char != gamescreen.BCK_CHAR { ; Hit something
-      if hit_char == remains.REMAINS_CHAR
+      if hit_char == remains.REM_CHAR1 or hit_char == remains.REM_CHAR2 or hit_char == remains.REM_CHAR3
         return true
 
       ; explode ship

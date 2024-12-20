@@ -78,11 +78,11 @@ bullets {
           if chr != gamescreen.BCK_CHAR {
 	          ; Check what we hit
 
-	          if chr == $89 { ; Hit snake
-              snake.bullet_hit( bulletRef[BD_X], bulletRef[BD_Y] )
-            } else if chr == remains.REMAINS_CHAR { ; Hit remains
-	            ; Do nothing for now
-            }
+            when chr {
+	      $89 -> snake.bullet_hit( bulletRef[BD_X], bulletRef[BD_Y] ) ; Hit snake
+	      remains.REM_CHAR1, remains.REM_CHAR2, remains.REM_CHAR3 -> remains.bullet_hit( bulletRef[BD_X], bulletRef[BD_Y] )
+	    }
+
             bulletRef[BD_ON] = 0
             active_shots--
           } else {

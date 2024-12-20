@@ -65,7 +65,7 @@ snake {
           ubyte nx
           ubyte ny
 
-          clear(x, y)
+          gamescreen.clear(x, y)
           nx = ( x + x_mv[dir] ) as ubyte
           ny = ( y + y_mv[dir] ) as ubyte
           ubyte chr = txt.getchr(nx, ny)
@@ -92,7 +92,7 @@ snake {
                 snakePartRef[SN_DIR] = 3
               }
             }
-            remains.REMAINS_CHAR -> { ; We hit a existing "bomb", need to move down
+            remains.REM_CHAR1, remains.REM_CHAR2, remains.REM_CHAR3 -> { ; We hit a existing "bomb", need to move down
               snakePartRef[SN_Y]++ 
               if snakePartRef[SN_DIR] == 3 {
                 snakePartRef[SN_DIR] = 1
@@ -101,7 +101,7 @@ snake {
               }
 	      ; Is new location occupied?
 	      chr = txt.getchr(x, y+1)
-	      while (chr == remains.REMAINS_CHAR) {
+	      while (chr == remains.REM_CHAR1 or chr == remains.REM_CHAR2 or chr == remains.REM_CHAR3) {
                 snakePartRef[SN_Y]++ ; Skip another level down
                 y++
                 chr = txt.getchr(x, y+1)
@@ -120,10 +120,6 @@ snake {
 
       snakePartRef += FIELD_COUNT
     }
-  }
-
-  sub clear( ubyte x, ubyte y ) {
-    txt.setcc(x, y, gamescreen.BCK_CHAR, gamescreen.BCK_COLOR)
   }
 
   sub draw( ubyte x, ubyte y ) {

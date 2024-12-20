@@ -1,7 +1,10 @@
 ; Hit snake part should eventually turns into a drop bomb
 
 drop_bomb {
- 
+
+  const ubyte BOMB_CHAR = $3D
+  const ubyte BOMB_COLOR = colors.LIGHT_GREEN
+
   const ubyte BOMB_ON     = 0 ; Grenade countdown, 0 doubles as off
   const ubyte BOMB_X      = 1 ; X position
   const ubyte BOMB_Y      = 2 ; Y position
@@ -22,7 +25,7 @@ drop_bomb {
   }
 
   sub create( ubyte x, ubyte y ) {
-      txt.setcc( x, y, gamescreen.BCK_CHAR, gamescreen.BCK_COLOR )
+      txt.setcc( x, y, BOMB_CHAR, BOMB_COLOR )
   }
 
   sub move() {
