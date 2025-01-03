@@ -1,12 +1,12 @@
-; Load new character set from bin file at $2000
+; Load new character set from bin file at $3000
 
-charset $2000 {
+charset $3000 {
 
 raw:
   %asmbinary "chardata.bin"
 
-  const uword CHARSET = $2000 ; Copied "const ubyte" doesn't like %raw (uword)
-  	      	      	      ; Fix later to have extra label 
+  const uword CHARSET = $3000 ; Copied "const ubyte" doesn't like %raw (uword)
+  	      	      	      ; Fix later to have extra label?
 
   ; activate the new charset in RAM
   sub load() {
